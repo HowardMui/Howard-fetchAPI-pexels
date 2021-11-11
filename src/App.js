@@ -1,10 +1,15 @@
 import React from "react";
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
-    <div>
-      <h1>This is Wilson project</h1>
-    </div>
+    <>
+      <Nav />
+      <Home />
+      <Footer />
+    </>
   );
 };
 
