@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { css } from "styled-components";
-require("dotenv").config();
+// require("dotenv").config();
 
 const SearchDiv = styled.div`
   text-align: center;
@@ -25,25 +25,7 @@ const SearchBtn = styled.button`
   cursor: pointer;
 `;
 
-const Search = () => {
-  let [data, setData] = useState(null);
-
-  const auth = process.env.PEXELSKEY;
-  console.log(process.env);
-  const intialURL = "https://api.pexels.com/v1/curated?page=1&per_page=15";
-
-  let search = async () => {
-    let dataFetch = await fetch(intialURL, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: auth,
-      },
-    });
-    let parsedData = await dataFetch.json();
-    setData(parsedData);
-  };
-
+const Search = ({ search }) => {
   return (
     <SearchDiv>
       <SearchInput type="text" />
