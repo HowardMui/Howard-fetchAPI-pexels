@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Search from "../components/Search";
 
 const Home = () => {
-  const auth = process.env.Pexelskey;
+  let [input, setIput] = useState("");
+
+  // let ClickHandler = () => {
+
+  // }
+
+  const searchURL = `https://api.pexels.com/v1/search?${input}=nature&per_page=1`;
 
   return (
-    <div>
+    <div style={{ minHeight: "100vh" }}>
       <Search />
     </div>
   );
