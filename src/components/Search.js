@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { css } from "styled-components";
-// require("dotenv").config();
+import { Button } from "./Button";
 
 const SearchDiv = styled.div`
   text-align: center;
@@ -18,18 +18,16 @@ const SearchInput = styled.input`
   ${Input_Btn};
   width: 30%;
 `;
-const SearchBtn = styled.button`
-  ${Input_Btn};
-  color: #fff;
-  background: purple;
-  cursor: pointer;
-`;
 
-const Search = ({ search }) => {
+const Search = ({ input, setInput, findPic }) => {
+  const changeHandler = (e) => {
+    setInput(e.target.value);
+  };
+
   return (
     <SearchDiv>
-      <SearchInput type="text" />
-      <SearchBtn onClick={search}>Search</SearchBtn>
+      <SearchInput type="text" onChange={changeHandler} value={input} />
+      <Button onClick={findPic}>Search</Button>
     </SearchDiv>
   );
 };
