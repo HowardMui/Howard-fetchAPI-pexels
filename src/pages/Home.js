@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Search from "../components/Search";
 import styled from "styled-components";
 import { Button } from "../components/Button";
@@ -29,7 +29,7 @@ const FetchWrapper = styled.div`
   a {
     text-decoration: none;
     color: #000;
-    transition: 0.2s ease-in-out;
+    transition: 0.1s ease-out;
     &:hover {
       color: yellowgreen;
     }
@@ -59,49 +59,109 @@ const Home = () => {
   // let [isClick, setClick] = useState(false);
 
   let [data, setData] = useState(null);
+  let [page, setPage] = useState(2);
+  let [current, setCurrent] = useState("");
+  // let prevInput = useRef("");
 
   const auth = process.env.REACT_APP_PEXELSKEY;
-  const intialURL = "https://api.pexels.com/v1/curated?page=1&per_page=15";
-  const searchURL = `https://api.pexels.com/v1/search?query=${input}&per_page=15`;
+  const intialURL = `https://api.pexels.com/v1/curated?page=1&per_page=15`;
+  const searchURL = `https://api.pexels.com/v1/search?query=${current}&per_page=15`;
 
   let search = async () => {
-    let dataFetch = await fetch(intialURL, {
+    if (current.trim() === "") {
+      let dataFetch = await fetch(intialURL, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: auth,
+        },
+      });
+      let parsedData = await dataFetch.json();
+      setData(parsedData.photos);
+      // console.log(parsedData);
+    } else {
+      let dataFetch = await fetch(searchURL, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: auth,
+        },
+      });
+      let parsedData = await dataFetch.json();
+      setData(parsedData.photos);
+      setInput("");
+      setPage(2);
+    }
+
+    // console.log(dataFetch);
+    // console.log(parsedData);
+  };
+
+  const loadMore = async () => {
+    let newURL;
+    if (current.trim() === "") {
+      newURL = `https://api.pexels.com/v1/curated?page=${page}&per_page=15`;
+    } else {
+      newURL = `https://api.pexels.com/v1/search?query=${current}&per_page=15&page=${page}`;
+    }
+    console.log(newURL);
+    setPage((page += 1));
+    const fetchData = await fetch(newURL, {
       method: "GET",
       headers: {
         Accept: "application/json",
         Authorization: auth,
       },
     });
-    let parsedData = await dataFetch.json();
-    setData(parsedData.photos);
-    // console.log(dataFetch);
-    // console.log(parsedData);
+    const parseddData = await fetchData.json();
+    setData(data.concat(parseddData.photos));
   };
-
-  let findPic = async () => {
-    let dataFetch = await fetch(searchURL, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: auth,
-      },
-    });
-    let parsedData = await dataFetch.json();
-    setData(parsedData.photos);
-    setInput("");
-    // console.log(dataFetch);
-    // console.log(parsedData);
-  };
-
-  console.log(data);
 
   useEffect(() => {
     search();
   }, []);
 
+  useEffect(() => {
+    search();
+    console.log(current);
+  }, [current]);
+
+  // useEffect(() => {
+  //   prevInput.current = input;
+  //   console.log(prevInput.current);
+  // }, [input]);
+
+  // let findPic = async () => {
+  //   if (input.trim() === "") {
+  //     return search();
+  //   }
+
+  //   let dataFetch = await fetch(searchURL, {
+  //     method: "GET",
+  //     headers: {
+  //       Accept: "application/json",
+  //       Authorization: auth,
+  //     },
+  //   });
+  //   let parsedData = await dataFetch.json();
+  //   setData(parsedData.photos);
+  //   setInput("");
+  //   // console.log(dataFetch);
+  //   // console.log(parsedData);
+  // };
+  // console.log(input);
+
+  // console.log(data);
+
   return (
     <Homecontainer>
-      <Search findPic={findPic} input={input} setInput={setInput} />
+      <Search
+        findPic={() => {
+          setCurrent(input);
+        }}
+        input={input}
+        setInput={setInput}
+      />
       <FetchDiv>
         {data &&
           data.map((items, index) => {
@@ -122,7 +182,9 @@ const Home = () => {
           })}
       </FetchDiv>
       <FetchBtn>
-        <Button red>Load More</Button>
+        <Button red onClick={loadMore}>
+          Load More
+        </Button>
       </FetchBtn>
     </Homecontainer>
   );
