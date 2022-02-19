@@ -1,0 +1,101 @@
+@import "./mixins";
+@import "./variables";
+
+// ---------------------------- Navbar ---------------------------- //
+
+.navbar {
+  background: $bg-grey-color;
+  height: 10vh;
+
+  & .navbar-brand {
+    @include transition-text;
+    color: $text-color;
+
+    &:hover {
+      color: $text-hover-color;
+    }
+  }
+
+  & .navbar-toggler {
+    border: 0;
+    font-size: $btn-font-size;
+  }
+
+  & .navbar-nav a {
+    @include LinkTag();
+    &:hover {
+      color: $text-hover-color;
+    }
+  }
+}
+
+// ---------------------------- Home ---------------------------- //
+
+// ---------------------------- Fetch Page ---------------------------- //
+
+// ---------------------------- Search ---------------------------- //
+
+.search-div {
+  & .input-group {
+    width: 40%;
+    margin: auto;
+  }
+
+  & .input-div {
+    border: 2px solid #00b4cc;
+  }
+
+  & .input-group-text {
+    background-color: #00b4cc;
+    border: 2px solid #00b4cc;
+
+    & svg {
+      color: $icon-color;
+    }
+  }
+}
+
+// #search-div {
+//   padding: 10px 0px;
+//   background-color: #ff7575;
+//   border-radius: 20px;
+//   box-shadow: 0 10px 40px #ff7c7c, 0 0 0 20px #ffffffeb;
+//   transform: scale(0.6);
+//   height: 100px;
+//   display: flex;
+//   align-items: center;
+//   position: relative;
+
+//   & .input-div {
+//     width: 100%;
+//     height: 80%;
+//     & input {
+//       color: #fff;
+//       font-family: Nunito;
+//       padding: 0;
+//       margin: 0;
+//       border: 0;
+//       width: 90%;
+//       height: 80%;
+//       // background-color: transparent;
+
+//       & input[type="text"] {
+//         width: 100%;
+//         height: 96px;
+//         font-size: 60px;
+//         line-height: 1;
+//       }
+//     }
+//   }
+
+//   & .btn-div {
+//     position: absolute;
+//   }
+// }
+
+// ---------------------------- Footer ---------------------------- //
+
+footer {
+  background: $footer-color;
+  color: $footer-text-color;
+}

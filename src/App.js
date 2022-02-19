@@ -1,10 +1,10 @@
 import React from "react";
-import Footer from "./components/Footer";
-import Nav from "./components/Nav";
-import Home from "./pages/Home";
+import Footer from "./components/Footer/Footer";
+import FetchPage from "./components/FetchPage/FetchPage";
 import { createGlobalStyle } from "styled-components";
 import { Routes, Route } from "react-router-dom";
-import About from "./pages/About";
+import Heading from "./components/Nav/Heading";
+import Home from "./pages/Home";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -20,13 +20,11 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Nav />
+      <Heading />
       <Routes>
         <Route path="/" exact element={<Home />} />
-
-        <Route path="/about" exact element={<About />} />
+        <Route path="/fetch" exact element={<FetchPage />} />
       </Routes>
-
       <Footer />
     </>
   );
