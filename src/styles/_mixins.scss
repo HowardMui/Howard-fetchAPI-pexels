@@ -1,5 +1,5 @@
 @mixin btnStyle() {
-  color: $text-color;
+  color: $text-white-color;
   width: 30%;
   &:hover {
     background-color: $swap-bg-color-to-red;

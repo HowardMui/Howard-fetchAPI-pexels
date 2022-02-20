@@ -1,0 +1,30 @@
+@import "../../styles/styles.scss";
+
+.hover {
+  position: relative;
+
+  &__no-hover {
+    opacity: 1;
+    transition: $transition-props;
+  }
+
+  &:hover &__no-hover {
+    opacity: 0;
+  }
+
+  &__hover {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: $transition-props;
+
+    & button {
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  &:hover &__hover {
+    opacity: 1;
+  }
+}

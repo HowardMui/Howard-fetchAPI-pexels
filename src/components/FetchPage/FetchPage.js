@@ -131,24 +131,24 @@ const FetchPage = () => {
   //   console.log(prevInput.current);
   // }, [input]);
 
-  // let findPic = async () => {
-  //   if (input.trim() === "") {
-  //     return search();
-  //   }
+  let findPic = async () => {
+    if (input.trim() === "") {
+      return search();
+    }
 
-  //   let dataFetch = await fetch(searchURL, {
-  //     method: "GET",
-  //     headers: {
-  //       Accept: "application/json",
-  //       Authorization: auth,
-  //     },
-  //   });
-  //   let parsedData = await dataFetch.json();
-  //   setData(parsedData.photos);
-  //   setInput("");
-  //   // console.log(dataFetch);
-  //   // console.log(parsedData);
-  // };
+    let dataFetch = await fetch(searchURL, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: auth,
+      },
+    });
+    let parsedData = await dataFetch.json();
+    setData(parsedData.photos);
+    setInput("");
+    // console.log(dataFetch);
+    // console.log(parsedData);
+  };
   // console.log(input);
 
   // console.log(data);

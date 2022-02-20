@@ -5,6 +5,7 @@ import { createGlobalStyle } from "styled-components";
 import { Routes, Route } from "react-router-dom";
 import Heading from "./components/Nav/Heading";
 import Home from "./pages/Home";
+import FetchContainer from "./components/FetchPage/FetchContainer";
 
 const GlobalStyle = createGlobalStyle`
   *{
@@ -24,6 +25,7 @@ const App = () => {
       <Routes>
         <Route path="/" exact element={<Home />} />
         <Route path="/fetch" exact element={<FetchPage />} />
+        <Route path="/fetchtry" exact element={<FetchContainer />} />
       </Routes>
       <Footer />
     </>

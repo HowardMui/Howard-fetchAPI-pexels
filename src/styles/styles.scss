@@ -9,7 +9,7 @@
 
   & .navbar-brand {
     @include transition-text;
-    color: $text-color;
+    color: $text-white-color;
 
     &:hover {
       color: $text-hover-color;
@@ -31,7 +31,30 @@
 
 // ---------------------------- Home ---------------------------- //
 
+#fetch-container {
+  min-height: 100vh;
+}
+
 // ---------------------------- Fetch Page ---------------------------- //
+
+.card-div {
+  &:hover .img-info {
+    background: rgba(0, 0, 0, 0.85);
+    opacity: 1;
+  }
+
+  & .img-info {
+    padding: 50px 30px;
+    opacity: 0;
+    transition: $transition-props;
+
+    & .card-title,
+    .card-text,
+    .card-link {
+      color: $text-white-color;
+    }
+  }
+}
 
 // ---------------------------- Search ---------------------------- //
 
@@ -42,56 +65,43 @@
   }
 
   & .input-div {
-    border: 2px solid #00b4cc;
+    border: 1px solid $border-color;
   }
 
   & .input-group-text {
-    background-color: #00b4cc;
-    border: 2px solid #00b4cc;
+    background-color: $bg-black-color;
+    border: 1px solid $border-color;
 
     & svg {
-      color: $icon-color;
+      font-size: $btn-font-size;
+      color: $btn-color;
+      cursor: pointer;
+      transition: $transition-props;
     }
+
+    // & .search-arrow-icon {
+    //   font-size: $btn-font-size;
+    //   color: $btn-color;
+    //   cursor: pointer;
+    //   display: none;
+
+    //   &:hover {
+    //     display: block;
+    //   }
+    // }
+
+    // & .search-icon {
+    //   font-size: $btn-font-size;
+    //   color: $btn-color;
+    //   cursor: pointer;
+    //   display: block;
+
+    //   &:hover {
+    //     display: none;
+    //   }
+    // }
   }
 }
-
-// #search-div {
-//   padding: 10px 0px;
-//   background-color: #ff7575;
-//   border-radius: 20px;
-//   box-shadow: 0 10px 40px #ff7c7c, 0 0 0 20px #ffffffeb;
-//   transform: scale(0.6);
-//   height: 100px;
-//   display: flex;
-//   align-items: center;
-//   position: relative;
-
-//   & .input-div {
-//     width: 100%;
-//     height: 80%;
-//     & input {
-//       color: #fff;
-//       font-family: Nunito;
-//       padding: 0;
-//       margin: 0;
-//       border: 0;
-//       width: 90%;
-//       height: 80%;
-//       // background-color: transparent;
-
-//       & input[type="text"] {
-//         width: 100%;
-//         height: 96px;
-//         font-size: 60px;
-//         line-height: 1;
-//       }
-//     }
-//   }
-
-//   & .btn-div {
-//     position: absolute;
-//   }
-// }
 
 // ---------------------------- Footer ---------------------------- //
 
