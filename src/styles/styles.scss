@@ -31,11 +31,57 @@
 
 // ---------------------------- Home ---------------------------- //
 
-#fetch-container {
+#home-div {
   min-height: 100vh;
+  @include displayFlex(center);
+  background: url("../asset/images/bg-1.jpg");
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+
+  & .text-div {
+    & h1,
+    p,
+    button {
+      color: white;
+      margin-bottom: 4rem;
+    }
+
+    & .btn {
+      @include btnStyle;
+    }
+
+    & .btn-primary {
+      @include btn-color-style;
+      &:focus {
+        outline: none;
+        color: $bg-white-color;
+        background-color: $swap-bg-color-to-red;
+        border-color: $bg-white-color;
+        box-shadow: none;
+      }
+    }
+  }
+
+  & .image-div {
+    & .trypic {
+      margin: auto;
+      width: 20vw;
+      height: 100%;
+      background: url("../asset/images/pexels-logo.jpg");
+      // background-attachment: fixed;
+      // background-position: center center;
+      background-size: cover;
+      border-radius: 2rem;
+    }
+  }
 }
 
 // ---------------------------- Fetch Page ---------------------------- //
+
+#fetch-container {
+  min-height: 100vh;
+}
 
 .card-div {
   &:hover .img-info {
@@ -47,6 +93,7 @@
     padding: 50px 30px;
     opacity: 0;
     transition: $transition-props;
+    overflow: hidden;
 
     & .card-title,
     .card-text,
@@ -68,38 +115,82 @@
     border: 1px solid $border-color;
   }
 
+  & svg {
+    font-size: $btn-font-size;
+    color: $btn-color;
+    cursor: pointer;
+    transition: $transition-props;
+  }
+
   & .input-group-text {
     background-color: $bg-black-color;
     border: 1px solid $border-color;
+    transition: $transition-props;
 
-    & svg {
-      font-size: $btn-font-size;
-      color: $btn-color;
-      cursor: pointer;
-      transition: $transition-props;
+    &:hover {
+      background: $swap-bg-color-to-red;
     }
+  }
 
-    // & .search-arrow-icon {
-    //   font-size: $btn-font-size;
-    //   color: $btn-color;
-    //   cursor: pointer;
-    //   display: none;
+  // & .input-div:hover ~ .input-group-text {
+  //   background: $swap-bg-color-to-red;
+  // }
+}
 
-    //   &:hover {
-    //     display: block;
-    //   }
-    // }
+.hover {
+  position: relative;
 
-    // & .search-icon {
-    //   font-size: $btn-font-size;
-    //   color: $btn-color;
-    //   cursor: pointer;
-    //   display: block;
+  &__no-hover {
+    opacity: 1;
+    transition: $transition-props;
+  }
 
-    //   &:hover {
-    //     display: none;
-    //   }
-    // }
+  &:hover &__no-hover {
+    opacity: 0;
+  }
+
+  &:hover .input-group-text {
+    background: $swap-bg-color-to-red;
+  }
+
+  &__hover {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: $transition-props;
+
+    & button {
+      background-color: transparent;
+      border: none;
+    }
+  }
+
+  &:hover &__hover {
+    opacity: 1;
+  }
+}
+
+// ---------------------------- DataDiv ---------------------------- //
+.data-div {
+  margin-bottom: 7rem;
+}
+
+// ---------------------------- Btn ---------------------------- //
+
+.btn-div {
+  & .btn {
+    @include btnStyle;
+  }
+
+  & .btn-primary {
+    @include btn-color-style;
+    &:focus {
+      outline: none;
+      color: $bg-white-color;
+      background-color: $swap-bg-color-to-red;
+      border-color: $bg-white-color;
+      box-shadow: none;
+    }
   }
 }
 

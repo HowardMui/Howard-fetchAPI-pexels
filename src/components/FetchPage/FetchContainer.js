@@ -7,7 +7,7 @@ import DataDiv from "./DataDiv";
 
 const FetchContainer = () => {
   let [input, setInput] = useState("");
-  let [fetchData, setFetchData] = useState(null);
+  let [fetchDataStorage, setFetchData] = useState(null);
   let [current, setCurrent] = useState("");
   let [page, setPage] = useState(1);
 
@@ -15,70 +15,67 @@ const FetchContainer = () => {
   const intialURL = `https://api.pexels.com/v1/curated?page=1&per_page=15`;
   const searchURL = `https://api.pexels.com/v1/search?query=${current}&per_page=15`;
 
-  //   const findPicFn = () => {
-  //     SearchFunction.findPicFn(input, current, searchURL, setCurrent, setFetchData);
-  //   };
-
   const searchFn = async () => {
-    console.log("trigger search");
     if (current.trim() === "") {
-      console.log("trigger initsearch");
       let dataFetch = await fetch(intialURL, {
         method: "GET",
-        headers: {
-          Accept: "application/json",
-          Authorization: auth,
-        },
+        headers: { Accept: "application/json", Authorization: auth },
       });
 
       let parsedData = await dataFetch.json();
+      console.log(parsedData);
       setFetchData(parsedData.photos);
-      //   console.log(dataFetch);
-      //   console.log(parsedData);
     } else {
-      console.log("trigger searchURL");
       let dataFetch = await fetch(searchURL, {
         method: "GET",
-        headers: {
-          Accept: "application/json",
-          Authorization: auth,
-        },
+        headers: { Accept: "application/json", Authorization: auth },
       });
       let parsedData = await dataFetch.json();
       setFetchData(parsedData.photos);
       setInput("");
       setPage(2);
-      console.log(dataFetch);
-      console.log(parsedData);
     }
   };
 
   const findPicFn = async () => {
     setCurrent(input);
-    console.log("trigger findPic");
     if (current.trim() === "") {
-      return searchFn(input, current, intialURL, searchURL);
+      return searchFn();
     }
 
     let dataFetch = await fetch(searchURL, {
       method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: auth,
-      },
+      headers: { Accept: "application/json", Authorization: auth },
     });
     let parsedData = await dataFetch.json();
     setFetchData(parsedData.photos);
     setInput("");
-    // console.log(dataFetch);
-    // console.log(parsedData);
   };
+
+  const loadMoreFn = async () => {
+    let newURL;
+    if (current.trim() === "") {
+      newURL = `https://api.pexels.com/v1/curated?page=${page}&per_page=15`;
+    } else {
+      newURL = `https://api.pexels.com/v1/search?query=${current}&per_page=15&page=${page}`;
+    }
+    setPage((page += 1));
+    const fetchData = await fetch(newURL, {
+      method: "GET",
+      headers: { Accept: "application/json", Authorization: auth },
+    });
+    const parsedData = await fetchData.json();
+    setFetchData(fetchDataStorage.concat(parsedData.photos));
+  };
+
+  console.log(fetchDataStorage);
+  const stateItem = { input, setInput, findPicFn };
 
   return (
     <div id="fetch-container">
       <Container>
-        <Search input={input} setInput={setInput} findPic={findPicFn} />
-        <DataDiv fetchData={fetchData} />
+        <Search {...stateItem} />
+        <DataDiv fetchDataStorage={fetchDataStorage} loadMoreFn={loadMoreFn} />
       </Container>
     </div>
   );

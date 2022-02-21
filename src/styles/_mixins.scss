@@ -8,10 +8,11 @@
 }
 
 @mixin btn-color-style() {
-  background-color: transparent;
+  background-color: $bg-black-color;
   border-radius: 20px;
   border: 2px solid $btn-color;
   &:hover {
+    background-color: $swap-bg-color-to-white;
     border: 2px solid $swap-text-color;
   }
 }
