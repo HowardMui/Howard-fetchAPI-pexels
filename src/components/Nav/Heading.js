@@ -18,7 +18,6 @@ const Heading = () => {
           <Nav className="ms-auto">
             <Link to="/">Home</Link>
             <Link to="/fetch">FetchPexels</Link>
-            <Link to="/fetchtry">FetchContainer</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -3,7 +3,6 @@ import "./hover.scss";
 import "../../styles/styles.scss";
 
 const Hover = (props) => {
-  console.log(props);
   return (
     <div className="hover">
       <div className="hover__no-hover">{props.children}</div>

@@ -34,31 +34,38 @@
 #home-div {
   min-height: 100vh;
   @include displayFlex(center);
+
   background: url("../asset/images/bg-1.jpg");
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
 
-  & .text-div {
-    & h1,
-    p,
-    button {
-      color: white;
-      margin-bottom: 4rem;
-    }
+  & .home-row-div {
+    padding: 5rem;
+    & .text-div {
+      & h1,
+      p,
+      button {
+        color: white;
+      }
 
-    & .btn {
-      @include btnStyle;
-    }
+      & h1 {
+        margin-bottom: 3rem;
+      }
 
-    & .btn-primary {
-      @include btn-color-style;
-      &:focus {
-        outline: none;
-        color: $bg-white-color;
-        background-color: $swap-bg-color-to-red;
-        border-color: $bg-white-color;
-        box-shadow: none;
+      & .btn {
+        @include btnStyle;
+      }
+
+      & .btn-primary {
+        @include btn-color-style;
+        &:focus {
+          outline: none;
+          color: $bg-white-color;
+          background-color: $swap-bg-color-to-red;
+          border-color: $bg-white-color;
+          box-shadow: none;
+        }
       }
     }
   }
@@ -66,7 +73,7 @@
   & .image-div {
     & .trypic {
       margin: auto;
-      width: 20vw;
+      width: 30vw;
       height: 100%;
       background: url("../asset/images/pexels-logo.jpg");
       // background-attachment: fixed;
@@ -90,7 +97,7 @@
   }
 
   & .img-info {
-    padding: 50px 30px;
+    padding: 30px 30px;
     opacity: 0;
     transition: $transition-props;
     overflow: hidden;
@@ -113,6 +120,10 @@
 
   & .input-div {
     border: 1px solid $border-color;
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
   }
 
   & svg {
@@ -126,10 +137,6 @@
     background-color: $bg-black-color;
     border: 1px solid $border-color;
     transition: $transition-props;
-
-    &:hover {
-      background: $swap-bg-color-to-red;
-    }
   }
 
   // & .input-div:hover ~ .input-group-text {
@@ -149,10 +156,6 @@
     opacity: 0;
   }
 
-  &:hover .input-group-text {
-    background: $swap-bg-color-to-red;
-  }
-
   &__hover {
     position: absolute;
     top: 0;
@@ -160,6 +163,7 @@
     transition: $transition-props;
 
     & button {
+      padding: 0;
       background-color: transparent;
       border: none;
     }
@@ -186,11 +190,19 @@
     @include btn-color-style;
     &:focus {
       outline: none;
-      color: $bg-white-color;
-      background-color: $swap-bg-color-to-red;
-      border-color: $bg-white-color;
       box-shadow: none;
     }
+  }
+}
+
+// ---------------------------- Loading ---------------------------- //
+
+.spinner__div {
+  min-height: 100vh;
+  @include displayFlex(center);
+  & .spinner-border {
+    width: 300px;
+    height: 300px;
   }
 }
 

@@ -3,7 +3,6 @@ import { FormControl, InputGroup } from "react-bootstrap";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";
 import Hover from "./Hover";
-import "./search.scss";
 
 const Search = ({ input, setInput, findPicFn }) => {
   return (

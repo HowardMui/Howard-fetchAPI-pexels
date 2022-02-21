@@ -1,9 +1,10 @@
 import React from "react";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Row, Spinner } from "react-bootstrap";
 import "../../styles/styles.scss";
 import { Btn } from "../partials/Btn";
+import Loading from "../partials/Loading";
 
-const DataDiv = ({ fetchDataStorage, loadMoreFn }) => {
+const DataDiv = ({ fetchDataStorage, loadMoreFn, loading2 }) => {
   //   console.log(fetchData);
   return (
     <div className="data-div">
@@ -27,7 +28,13 @@ const DataDiv = ({ fetchDataStorage, loadMoreFn }) => {
               </Col>
             ))}
           </Row>
-          <Btn loadMoreFn={loadMoreFn}>Load More</Btn>
+          {loading2 ? (
+            <Btn loadMoreFn={loadMoreFn}>
+              <Spinner animation="border" style={{ width: "20px", height: "20px" }} />
+            </Btn>
+          ) : (
+            <Btn loadMoreFn={loadMoreFn}>Load More</Btn>
+          )}
         </>
       )}
     </div>
