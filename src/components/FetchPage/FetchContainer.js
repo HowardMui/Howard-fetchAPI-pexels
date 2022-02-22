@@ -20,23 +20,21 @@ const FetchContainer = () => {
   const searchURL = `https://api.pexels.com/v1/search?query=${current}&per_page=15`;
 
   const searchFn = async () => {
-    console.log("searchFn is running");
+    // console.log("searchFn is running");
     if (current.trim() === "") {
       let dataFetch = await fetch(intialURL, {
         method: "GET",
         headers: { Accept: "application/json", Authorization: auth },
-        mode: "no-cors",
       });
-      console.log("fetch intialURL");
+
       let parsedData = await dataFetch.json();
-      //   console.log(parsedData);
+
       setFetchData(parsedData.photos);
-      setLoading(false);
+      console.log(parsedData);
     } else {
       let dataFetch = await fetch(searchURL, {
         method: "GET",
         headers: { Accept: "application/json", Authorization: auth },
-        mode: "no-cors",
       });
       console.log("fetch searchURL");
       let parsedData = await dataFetch.json();
@@ -60,7 +58,6 @@ const FetchContainer = () => {
     let dataFetch = await fetch(searchURL, {
       method: "GET",
       headers: { Accept: "application/json", Authorization: auth },
-      mode: "no-cors",
     });
     let parsedData = await dataFetch.json();
     setFetchData(parsedData.photos);
@@ -81,7 +78,6 @@ const FetchContainer = () => {
     const fetchData = await fetch(newURL, {
       method: "GET",
       headers: { Accept: "application/json", Authorization: auth },
-      mode: "no-cors",
     });
     const parsedData = await fetchData.json();
     console.log(parsedData);
