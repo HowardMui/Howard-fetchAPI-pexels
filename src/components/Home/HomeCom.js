@@ -5,6 +5,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import { Btn } from "../partials/Btn";
 
 const HomeCom = () => {
+  console.log("landing page");
+
   return (
     <div className="" id="home-div">
       <Container>
