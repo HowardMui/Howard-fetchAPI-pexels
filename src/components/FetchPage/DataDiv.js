@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, Card, Col, Row, Spinner } from "react-bootstrap";
+import { Card, Col, Row, Spinner } from "react-bootstrap";
 import "../../styles/styles.scss";
 import { Btn } from "../partials/Btn";
-import Loading from "../partials/Loading";
 
 const DataDiv = ({ fetchDataStorage, loadMoreFn, loading2 }) => {
   //   console.log(fetchData);
@@ -11,8 +10,8 @@ const DataDiv = ({ fetchDataStorage, loadMoreFn, loading2 }) => {
       {fetchDataStorage && (
         <>
           <Row xs={1} md={2} lg={3} className="data-row g-5">
-            {fetchDataStorage.map((item) => (
-              <Col>
+            {fetchDataStorage.map((item, index) => (
+              <Col key={index}>
                 <Card className="card-div">
                   <Card.Img variant="top" src={item.src.tiny} alt={item.alt} />
                   <Card.ImgOverlay className="img-info">
