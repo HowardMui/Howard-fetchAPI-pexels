@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FormControl, InputGroup } from "react-bootstrap";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { BsArrowRight } from "react-icons/bs";

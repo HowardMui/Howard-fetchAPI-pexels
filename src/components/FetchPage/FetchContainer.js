@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import "../../styles/styles.scss";
 import Loading from "../partials/Loading";
 import Search from "../Search/Search";
 import DataDiv from "./DataDiv";
-// import SearchFunction from "../Function/FunctionSearch";
 
 const FetchContainer = () => {
   let [input, setInput] = useState("");
@@ -19,8 +18,7 @@ const FetchContainer = () => {
   const intialURL = `https://api.pexels.com/v1/curated?page=1&per_page=15`;
   const searchURL = `https://api.pexels.com/v1/search?query=${current}&per_page=15`;
 
-  const searchFn = async () => {
-    // console.log("searchFn is running");
+  const searchFn = useCallback(async () => {
     if (current.trim() === "") {
       let dataFetch = await fetch(intialURL, {
         method: "GET",
@@ -30,27 +28,25 @@ const FetchContainer = () => {
       let parsedData = await dataFetch.json();
 
       setFetchData(parsedData.photos);
-      console.log(parsedData);
     } else {
       let dataFetch = await fetch(searchURL, {
         method: "GET",
         headers: { Accept: "application/json", Authorization: auth },
       });
-      console.log("fetch searchURL");
+
       let parsedData = await dataFetch.json();
       setFetchData(parsedData.photos);
       setLoading(false);
       setInput("");
       setPage(2);
     }
-  };
+  }, [auth, current, intialURL, searchURL]);
 
   const findPicFn = async () => {
     setLoading(true);
     setCurrent(input);
-    console.log(current);
+
     if (current.trim() === "") {
-      console.log("Go to searchFn");
       return searchFn();
     }
 
@@ -74,20 +70,20 @@ const FetchContainer = () => {
       newURL = `https://api.pexels.com/v1/search?query=${current}&per_page=15&page=${page}`;
     }
     setPage((page += 1));
-    console.log(newURL);
+
     const fetchData = await fetch(newURL, {
       method: "GET",
       headers: { Accept: "application/json", Authorization: auth },
     });
     const parsedData = await fetchData.json();
-    console.log(parsedData);
+
     setFetchData(fetchDataStorage.concat(parsedData.photos));
     setLoading2(false);
   };
 
   useEffect(() => {
     searchFn();
-  }, [current]);
+  }, [searchFn]);
 
   const stateItemSearch = { input, setInput, findPicFn };
   const stateItemData = { fetchDataStorage, loadMoreFn, loading2 };
